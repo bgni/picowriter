@@ -5,7 +5,7 @@ set(FAMILY "rp2040")
 
 include(pico_sdk_import.cmake)
 #include($ENV{PICO_EXAMPLES_PATH}/example_auto_set_url.cmake)
-include($ENV{PICO_SDK_PATH}/lib/tinyusb/hw/bsp/family_support.cmake)
+include($ENV{PICO_SDK_PATH}/lib/tinyusb/hw/bsp/rp2040/family.cmake)
 include_directories($ENV{PICO_SDK_PATH}/lib/tinyusb/lib/tinyusb/src)
 
 project("raspberry_pi_pico-picowrite")
