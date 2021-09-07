@@ -36,9 +36,15 @@
 #include "bsp/board.h"
 #include "tusb.h"
 
+#include "picowriter.h"
+
 //waveshare eink
 #include "EPD_Test.h"
 #include "EPD_2in9_V2.h"
+
+
+
+
 
 void print_greeting(void);
 void led_blinking_task(void);
@@ -87,6 +93,10 @@ void core1_entry(){
 
 int main(void) {
     stdio_init_all();
+    uart_init(KBD_UART_ID, KBD_UART_BAUD_RATE);
+    gpio_set_function(KBD_UART_TX_PIN, GPIO_FUNC_UART);
+    gpio_set_function(KBD_UART_RX_PIN, GPIO_FUNC_UART);
+    uart_puts(KBD_UART_ID, "KBDINIT\n");
 
     //double core1 launch needed to reset core 1 during a rebuild
     multicore_launch_core1(core1_entry);

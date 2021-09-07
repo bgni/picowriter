@@ -27,7 +27,10 @@
 #include "tusb.h"
 #include "EPD_2in9_V2.h"
 #include "EPD_Test.h"
+#include "picowriter.h"
 #include "pico/multicore.h"
+
+
 
 //--------------------------------------------------------------------+
 // MACRO TYPEDEF CONSTANT ENUM DECLARATION
@@ -149,6 +152,9 @@ static void process_kbd_report(hid_keyboard_report_t const *report)
   //------------- example code ignore control (non-printable) key affects -------------//
   for(uint8_t i=0; i<6; i++)
   {
+    uart_putc_raw(KBD_UART_ID, 6);
+    uart_putc_raw(KBD_UART_ID, report->modifier);
+    uart_putc_raw(KBD_UART_ID, report->keycode[i]);
     if ( report->keycode[i] )
     {
       if ( find_key_in_report(&prev_report, report->keycode[i]) )
